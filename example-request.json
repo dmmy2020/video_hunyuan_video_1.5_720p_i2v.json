@@ -1,0 +1,590 @@
+{
+  "input": {
+    "workflow": {
+      "8": {
+        "inputs": {
+          "samples": [
+            "125",
+            0
+          ],
+          "vae": [
+            "10",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "10": {
+        "inputs": {
+          "filename": "hunyuanvideo15_vae_fp16.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "11": {
+        "inputs": {
+          "filename": "qwen_2.5_vl_7b_fp8_scaled.safetensors"
+        },
+        "class_type": "DualCLIPLoader",
+        "_meta": {
+          "title": "DualCLIPLoader"
+        }
+      },
+      "12": {
+        "inputs": {
+          "filename": "hunyuanvideo1.5_720p_i2v_fp16.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "44": {
+        "inputs": {
+          "text": "A realistic interior real estate photo, professional architectural photography, interior design.\nPreserve the exact same room layout, architecture, materials, lighting, furniture, decor, reflections, and all details exactly as in the input image.\nDo not modify, remove, or add any objects. No people, no characters, no text.\nApply only cinematic camera motion effects — choose one or combine subtly:\n\nDolly-in: smooth slow forward movement into the room, gentle depth shift, stabilized motion.\n\nPan: smooth sideways camera motion left or right, maintaining the same viewpoint and perspective.\n\nTilt: subtle vertical tilt up or down, elegant cinematic angle change, very gentle and controlled.\n\nNatural soft window lighting, warm cinematic color grading, shallow depth of field, subtle parallax effect.\nThe scene must remain 100% identical to the original image; only the camera moves.\nCreates a high-end real estate cinematic shot.",
+          "clip": [
+            "11",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Positive Prompt)"
+        }
+      },
+      "78": {
+        "inputs": {
+          "value": 1280,
+          "positive": [
+            "44",
+            0
+          ],
+          "negative": [
+            "93",
+            0
+          ],
+          "vae": [
+            "10",
+            0
+          ],
+          "start_image": [
+            "80",
+            0
+          ],
+          "clip_vision_output": [
+            "79",
+            0
+          ]
+        },
+        "class_type": "HunyuanVideo15ImageToVideo",
+        "_meta": {
+          "title": "HunyuanVideo15ImageToVideo"
+        }
+      },
+      "79": {
+        "inputs": {
+          "text": "center",
+          "clip_vision": [
+            "81",
+            0
+          ],
+          "image": [
+            "80",
+            0
+          ]
+        },
+        "class_type": "CLIPVisionEncode",
+        "_meta": {
+          "title": "CLIPVisionEncode"
+        }
+      },
+      "80": {
+        "inputs": {
+          "image": "Screenshot 2025-12-01 141417.png"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      },
+      "81": {
+        "inputs": {
+          "filename": "sigclip_vision_patch14_384.safetensors"
+        },
+        "class_type": "CLIPVisionLoader",
+        "_meta": {
+          "title": "CLIPVisionLoader"
+        }
+      },
+      "93": {
+        "inputs": {
+          "text": "Do not change the room layout, architecture, perspective, furniture, decor, materials, lighting, colors, or reflections.\nNo distortion, no fisheye, no warping, no bending.\nNo added objects, no removed objects, no hallucinated details.\nNo people, no characters, no animals, no text, no logos.\nNo environmental changes, no weather changes, no time-of-day shift.\nDo not alter walls, windows, floor, ceiling, furniture position, or materials.\nAvoid over-sharpening, over-saturation, unrealistic lighting, artificial bokeh, or glitch effects.\nNo texture deformation, no blur trails, no jitter, no unstable motion.\nCamera motion only — no scene modification.",
+          "clip": [
+            "11",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Negative Prompt)"
+        }
+      },
+      "101": {
+        "inputs": {
+          "value": 12,
+          "images": [
+            "8",
+            0
+          ]
+        },
+        "class_type": "CreateVideo",
+        "_meta": {
+          "title": "CreateVideo"
+        }
+      },
+      "102": {
+        "inputs": {
+          "filename": "video/hunyuan_video_1.5",
+          "video": [
+            "101",
+            0
+          ]
+        },
+        "class_type": "SaveVideo",
+        "_meta": {
+          "title": "SaveVideo"
+        }
+      },
+      "105": {
+        "inputs": {
+          "value": 0.2,
+          "model": [
+            "12",
+            0
+          ]
+        },
+        "class_type": "EasyCache",
+        "_meta": {
+          "title": "EasyCache"
+        }
+      },
+      "108": {
+        "inputs": {
+          "filename": "hunyuanvideo15_latent_upsampler_1080p.safetensors"
+        },
+        "class_type": "LatentUpscaleModelLoader",
+        "_meta": {
+          "title": "LatentUpscaleModelLoader"
+        }
+      },
+      "109": {
+        "inputs": {
+          "text": "bilinear",
+          "model": [
+            "108",
+            0
+          ],
+          "samples": [
+            "125",
+            0
+          ]
+        },
+        "class_type": "HunyuanVideo15LatentUpscaleWithModel",
+        "_meta": {
+          "title": "HunyuanVideo15LatentUpscaleWithModel"
+        }
+      },
+      "111": {
+        "inputs": {
+          "filename": "hunyuanvideo1.5_1080p_sr_distilled_fp16.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "112": {
+        "inputs": {
+          "value": 512,
+          "samples": [
+            "139",
+            0
+          ],
+          "vae": [
+            "10",
+            0
+          ]
+        },
+        "class_type": "VAEDecodeTiled",
+        "_meta": {
+          "title": "VAEDecodeTiled"
+        }
+      },
+      "113": {
+        "inputs": {
+          "value": 0.7,
+          "positive": [
+            "44",
+            0
+          ],
+          "negative": [
+            "93",
+            0
+          ],
+          "latent": [
+            "109",
+            0
+          ],
+          "vae": [
+            "10",
+            0
+          ],
+          "start_image": [
+            "80",
+            0
+          ],
+          "clip_vision_output": [
+            "79",
+            0
+          ]
+        },
+        "class_type": "HunyuanVideo15SuperResolution",
+        "_meta": {
+          "title": "HunyuanVideo15SuperResolution"
+        }
+      },
+      "114": {
+        "inputs": {
+          "value": 24,
+          "images": [
+            "117",
+            0
+          ]
+        },
+        "class_type": "CreateVideo",
+        "_meta": {
+          "title": "CreateVideo"
+        }
+      },
+      "116": {
+        "inputs": {
+          "value": 0.2,
+          "model": [
+            "111",
+            0
+          ]
+        },
+        "class_type": "EasyCache",
+        "_meta": {
+          "title": "EasyCache"
+        }
+      },
+      "117": {
+        "inputs": {
+          "samples": [
+            "139",
+            0
+          ],
+          "vae": [
+            "10",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "118": {
+        "inputs": {
+          "filename": "video/hunyuan_video_1.5_sr",
+          "video": [
+            "114",
+            0
+          ]
+        },
+        "class_type": "SaveVideo",
+        "_meta": {
+          "title": "SaveVideo"
+        }
+      },
+      "120": {
+        "inputs": {
+          "value": 512,
+          "samples": [
+            "125",
+            0
+          ],
+          "vae": [
+            "10",
+            0
+          ]
+        },
+        "class_type": "VAEDecodeTiled",
+        "_meta": {
+          "title": "VAEDecodeTiled"
+        }
+      },
+      "125": {
+        "inputs": {
+          "noise": [
+            "127",
+            0
+          ],
+          "guider": [
+            "129",
+            0
+          ],
+          "sampler": [
+            "128",
+            0
+          ],
+          "sigmas": [
+            "126",
+            0
+          ],
+          "latent_image": [
+            "78",
+            2
+          ]
+        },
+        "class_type": "SamplerCustomAdvanced",
+        "_meta": {
+          "title": "SamplerCustomAdvanced"
+        }
+      },
+      "126": {
+        "inputs": {
+          "text": "simple",
+          "model": [
+            "105",
+            0
+          ]
+        },
+        "class_type": "BasicScheduler",
+        "_meta": {
+          "title": "BasicScheduler"
+        }
+      },
+      "127": {
+        "inputs": {
+          "value": 887963123424675
+        },
+        "class_type": "RandomNoise",
+        "_meta": {
+          "title": "RandomNoise"
+        }
+      },
+      "128": {
+        "inputs": {
+          "text": "euler"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "129": {
+        "inputs": {
+          "value": 6,
+          "model": [
+            "130",
+            0
+          ],
+          "positive": [
+            "78",
+            0
+          ],
+          "negative": [
+            "78",
+            1
+          ]
+        },
+        "class_type": "CFGGuider",
+        "_meta": {
+          "title": "CFGGuider"
+        }
+      },
+      "130": {
+        "inputs": {
+          "value": 7,
+          "model": [
+            "105",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingSD3",
+        "_meta": {
+          "title": "ModelSamplingSD3"
+        }
+      },
+      "131": {
+        "inputs": {
+          "value": 889
+        },
+        "class_type": "RandomNoise",
+        "_meta": {
+          "title": "RandomNoise"
+        }
+      },
+      "132": {
+        "inputs": {
+          "text": "euler"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "133": {
+        "inputs": {
+          "value": 2,
+          "model": [
+            "116",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingSD3",
+        "_meta": {
+          "title": "ModelSamplingSD3"
+        }
+      },
+      "134": {
+        "inputs": {
+          "text": "simple",
+          "model": [
+            "116",
+            0
+          ]
+        },
+        "class_type": "BasicScheduler",
+        "_meta": {
+          "title": "BasicScheduler"
+        }
+      },
+      "135": {
+        "inputs": {
+          "value": 4,
+          "sigmas": [
+            "134",
+            0
+          ]
+        },
+        "class_type": "SplitSigmas",
+        "_meta": {
+          "title": "SplitSigmas"
+        }
+      },
+      "137": {
+        "inputs": {},
+        "class_type": "DisableNoise",
+        "_meta": {
+          "title": "DisableNoise"
+        }
+      },
+      "138": {
+        "inputs": {
+          "noise": [
+            "131",
+            0
+          ],
+          "guider": [
+            "141",
+            0
+          ],
+          "sampler": [
+            "132",
+            0
+          ],
+          "sigmas": [
+            "135",
+            0
+          ],
+          "latent_image": [
+            "113",
+            2
+          ]
+        },
+        "class_type": "SamplerCustomAdvanced",
+        "_meta": {
+          "title": "SamplerCustomAdvanced"
+        }
+      },
+      "139": {
+        "inputs": {
+          "noise": [
+            "137",
+            0
+          ],
+          "guider": [
+            "140",
+            0
+          ],
+          "sampler": [
+            "132",
+            0
+          ],
+          "sigmas": [
+            "135",
+            1
+          ],
+          "latent_image": [
+            "138",
+            0
+          ]
+        },
+        "class_type": "SamplerCustomAdvanced",
+        "_meta": {
+          "title": "SamplerCustomAdvanced"
+        }
+      },
+      "140": {
+        "inputs": {
+          "value": 1,
+          "model": [
+            "116",
+            0
+          ],
+          "positive": [
+            "44",
+            0
+          ],
+          "negative": [
+            "93",
+            0
+          ]
+        },
+        "class_type": "CFGGuider",
+        "_meta": {
+          "title": "CFGGuider"
+        }
+      },
+      "141": {
+        "inputs": {
+          "value": 1,
+          "model": [
+            "133",
+            0
+          ],
+          "positive": [
+            "113",
+            0
+          ],
+          "negative": [
+            "113",
+            1
+          ]
+        },
+        "class_type": "CFGGuider",
+        "_meta": {
+          "title": "CFGGuider"
+        }
+      }
+    }
+  }
+}
